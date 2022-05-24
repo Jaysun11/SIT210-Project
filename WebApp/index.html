@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script type="text/javascript">
+    function sendArm()
+    {
+          $.ajax({
+            type: "POST",
+            url: "https://api.particle.io/v1/devices/e00fce68e0b08bcb6c27e2ba/arm?access_token=8b28464b8503c032122dd7aa9bf08711a4414090",
+            data: JSON.stringify({"args": "a"}),
+            contentType: "application/json",
+            success: function (result) {
+              console.log(result);
+            },
+            error: function (result, status) {
+              console.log(result);
+            }
+          });
+
+    }
+    function sendDisarm()
+    {
+          $.ajax({
+            type: "POST",
+            url: "https://api.particle.io/v1/devices/e00fce68e0b08bcb6c27e2ba/arm?access_token=8b28464b8503c032122dd7aa9bf08711a4414090",
+            data: JSON.stringify({"args": "d"}),
+            contentType: "application/json",
+            success: function (result) {
+              console.log(result);
+            },
+            error: function (result, status) {
+              console.log(result);
+            }
+          });
+
+    }
+  </script>
+</head>
+<body>
+
+  <div id="container" class="centre">
+
+    <div id="connect-buttons" class="centre">
+      <button class="button-connect" role="button" id="connect">Connect <span class="material-icons">bluetooth_connected</span></button>
+      <button class="button-disconnect" role="button" id="disconnect">Disconnect<span class="material-icons">bluetooth_disabled</span></button>
+      <button class="button-terminal" role="button" id="terminal_show">Show / Hide Terminal</br><span class="material-icons">terminal</span></button>
+    </div>
+
+
+    <div id="contents" class="centre">
+
+      <div id="terminal-cont">
+        <div id="terminal-title">Terminal</div>
+
+        <div id="terminal">
+          <div>Device connection...</div>
+          <div class="out">Outcoming message</div>
+          <div class="in">Incoming message</div>
+        </div>
+
+        <form id="send-form">
+          <input id="input" placeholder="Enter Message Here..." type="text">
+          <button type="submit" id="send_button"><span class="material-icons">send</span></button>
+        </form>
+      </div>
+
+      <div id="controlpanel">
+
+        <div id="buttons">
+          <div class="panel-button" id="AUTH_BUTTON" style="margin-left: 90px;">Unlock</br><span class="material-icons">lock</span></div>
+
+        </div>
+
+
+        <div id="auth_container">
+          <h1>Authenticate Central Hub</h1>
+          <h2>Please enter your password</h2>
+
+          <input placeholder="Passcode" type="text" id ="authfield"/>
+
+          <div class="small-button" id="submit-auth-button">Authenticate</div>
+
+        </div>
+
+        <div id="set_code_container">
+          <h1>Set a new Code</h1>
+          <h2>Please enter your new password</h2>
+
+          <input placeholder="Passcode" type="text" id ="codeField"/>
+
+          <div class="small-button" id="submit-code-button">Set New Code</div>
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+    <div id="content">
+
+      <h1 id="con_status">Connection Status: Disconnected</h1>
+      <h1 id="auth_status">Auth Status: Not Authenticated</h1>
+      <h1 id="arm_status">Armed Status: Not Armed</h1>
+
+      <div id="buttons">
+        <div class="panel-button" id="LOCK_BUTTON" style=" display:none;">Lock</br><span class="material-icons">lock</span></div>
+        <div class="panel-button" id="CODE_BUTTON" style=" display:none;">Set Code</br><span class="material-icons">code</span></div>
+        <div class="panel-button" id="ARM_BUTTON" onclick="sendArm();" style=" display:none;">Arm</br><span class="material-icons">lock</span></div>
+        <div class="panel-button" id="DISARM_BUTTON" onclick="sendDisarm();" style=" display:none;">Disarm</br><span class="material-icons">lock</span></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
+
+</body>
+</html>
